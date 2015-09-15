@@ -1,43 +1,33 @@
-# sketch-android-assets
+# sketch快速切图插件
 
-Generate Android assets in Sketch.
+一键导出安卓所需的各种尺寸切图.
 
-## Installation
+## 安装
 
-The basic procedure is the same regardless of which version of Sketch
-you're running, and how you installed it; simply check out this
-repository into your Sketch plugins directory and you're good to go.
 
-The actual location of your Sketch plugins directory will vary,
-however, depending on how you installed Sketch:
-
-* For Sketch 2, use the `~/Library/Application Support/sketch/Plugins`
-  folder.
-* If you bought Sketch 3 from the App Store, use the
+* Sketch 2版本, 使用 `~/Library/Application Support/sketch/Plugins`
+  路径.
+* 如果是在APPstore购买的版本, 使用
   `~/Library/Containers/com.bohemiancoding.sketch3/Data/Library/Application Support/sketch/Plugins`
-  directory
-* If you downloaded Sketch 3 from the Bohemian Coding site, use the
+  路径
+* 如果是从官网下载的sketch 3（ Bohemian Coding site）, 使用
   `~/Library/Application Support/com.bohemiancoding.sketch3/Plugins`
-  directory
+  路径
 
-Once you have checked out the plugin repository into the relevant
-directory, you'll find the plugin functions under the Plugins menu in Sketch.
+安装成功后，你可以在sketch的插件菜单中，找到相应文件。
 
-## Base resolution (experimental)
+## 基本分辨率 (实验中)
+如果默认显示设置是一个像素等于1DP，你可以一次性导出不同的分辨率的切图，无论是单文档或是所有文档。
 
-If the default assumption of one pixel in your Sketch designs being
-equal to 1dp, you can use a different factor either for a single
-Sketch document or for all documents you create.
-
-To use another resolution as the base, add a file named
-`.android_assets` (note the period at the beginning of the file name)
-with the contents
+为了解决另外一个问题，增加图层命名为
+`.android_assets` (注意：命名写在文件的前缀上)
+在文档中
 
 ```
 base_density:xxx
 ```
 
-where `xxx` is the density you want to use, any of:
+而 `xxx` 是切图使用的分辨率, 主要有以下几种:
 
 * mdpi
 * hdpi
@@ -45,23 +35,18 @@ where `xxx` is the density you want to use, any of:
 * xxhdpi
 * xxxhdpi
 
-So if 1 pixel in your design should be 1 pixel on an MDPI display, use
+举个例子，如果你想1像素显示在“MDPI”屏幕上，使用如下命名
 `base_density:mdpi`.
 
-If you don't specify a base density, the plugin will ask you which one
-to use for the document you're currently working on and create a
-configuration file for that. This means that the next time you run the
-plugin for this document, the density you selected previously will be used.
+如果不指定基密度，插件会问你使用哪一个分辨率
+设置好默认分辨率后，就不会出现这个问题。甚至在下次使用的过程中，会默认使用先前设定好的分辨率。
 
-The file should be placed in one of two places:
+自动生成的文件，可能会存放在一下两个目录:
 
-* if you're setting up defaults for a single Sketch document, add the
-  file to the same directory as your Sketch document
-* if you're setting up a default for *all* your Sketch document, add
-  it to your home folder (`/Users/<yourusername>/`).
+* 如果你的文件已经保存有单独目录,文件会和保存SKETCH文件的目录一起。
+* 如果你创建了一个保存所有sketch文档的目录,切片会保存到该路径 (`/Users/<yourusername>/`).
 
-To use `hdpi` as your default density for all your Sketch documents,
-simply enter this command into a Terminal window:
+想把 `hdpi`分辨率作为sketch的默认分辨率，你需要在mac的命令窗口输入下命令 :
 
 ```shell
 echo "base_density:hdpi" > ~/.android_assets
